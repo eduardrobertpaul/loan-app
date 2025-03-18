@@ -1,0 +1,5 @@
+**/*.test.*
+**/__tests__/**
+cypress/
+jest.config.js
+tsconfig.jest.json 
