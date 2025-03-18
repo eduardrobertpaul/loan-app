@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import { locales, defaultLocale } from './src/i18n.config';
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 
 const PUBLIC_PATHS = ['/login', '/register', '/api/auth'];
 
@@ -51,7 +50,9 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    // Match all paths except static files, images, files with extensions, and API auth routes
     '/((?!_next/static|_next/image|favicon.ico|images|.*\\..*|api/auth).*)',
+    // Match all API routes
     '/api/:path*'
   ],
 }; 

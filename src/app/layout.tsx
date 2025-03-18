@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Loan Evaluation System",
+  title: "Loan Application Evaluation System",
   description: "Application for bank employees to evaluate loan applications",
   keywords: ["loan", "bank", "evaluation", "application", "finance"],
   authors: [{ name: "Bank Corp" }],
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full" suppressHydrationWarning>
+    <html suppressHydrationWarning className="h-full">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
         <Providers>
           <ThemeProvider defaultTheme="light">

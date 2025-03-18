@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
-import { withNextIntl } from 'next-intl/plugin';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./src/lib/i18n.ts');
 
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: [],
+    serverExternalPackages: [],
   },
 };
 
-export default withNextIntl('./src/lib/i18n.ts')(nextConfig); 
+export default withNextIntl(nextConfig); 
