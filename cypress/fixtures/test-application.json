@@ -1,0 +1,33 @@
+{
+  "personalInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phone": "1234567890",
+    "dateOfBirth": "1990-01-01",
+    "address": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "zipCode": "12345"
+  },
+  "financialInfo": {
+    "annualIncome": 80000,
+    "employmentStatus": "employed",
+    "employerName": "ACME Corp",
+    "jobTitle": "Software Engineer",
+    "yearsEmployed": 5,
+    "monthlyExpenses": 2000,
+    "otherLoans": 500,
+    "creditScore": 750,
+    "bankruptcy": false,
+    "foreclosure": false
+  },
+  "loanDetails": {
+    "loanAmount": 200000,
+    "loanPurpose": "home",
+    "loanTerm": 360,
+    "collateral": true,
+    "collateralType": "Property",
+    "collateralValue": 250000
+  }
+} 
