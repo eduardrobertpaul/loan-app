@@ -16,8 +16,10 @@ interface LocaleLayoutProps {
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: LocaleLayoutProps) {
+  // Await the params to avoid the "params should be awaited" error
+  const { locale } = params;
   const messages = await getMessages(locale);
 
   return (
