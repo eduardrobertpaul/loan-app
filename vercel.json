@@ -1,12 +1,19 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "master": true
+    }
+  },
+  "rewrites": [
     {
-      "src": "package.json",
-      "use": "@vercel/next",
-      "config": {
-        "installCommand": "npm install --legacy-peer-deps"
-      }
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 } 

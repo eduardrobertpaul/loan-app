@@ -1,0 +1,5 @@
+[33mcommit 56221192e9ca38aede24ac1744320c64f6183f2a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: eduardrobertpaul <eduardrobertpaul@gmail.com>
+Date:   Tue Mar 25 12:34:41 2025 +0200
+
+    Modern UI redesign and bug fixes: Updated landing page with modern design, fixed accept/reject functionality, and repaired locale navigation issues
