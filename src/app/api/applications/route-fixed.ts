@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { LoanApplication } from "@/lib/types";
-import { getApplications, createApplication, applicationSchema } from "@/lib/services/application-service";
+import { applicationSchema, LoanApplication } from "@/lib/types/application";
+import { getApplications, createApplication } from "@/lib/services/application-service";
 import { auth } from "../../../../auth";
 
 // Ensure request is authenticated
@@ -21,7 +21,7 @@ async function authenticate() {
 // GET /api/applications - List all applications
 export async function GET(request: NextRequest) {
   const authResult = await authenticate();
-  if ('status' in authResult && authResult.status === 401) return authResult;
+  if (authResult.status === 401) return authResult;
   
   try {
     // Parse query parameters for filtering
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
 // POST /api/applications - Create a new application
 export async function POST(request: NextRequest) {
   const authResult = await authenticate();
-  if ('status' in authResult && authResult.status === 401) return authResult;
+  if (authResult.status === 401) return authResult;
   
   try {
     const body = await request.json();
@@ -56,14 +56,13 @@ export async function POST(request: NextRequest) {
       const validatedData = applicationSchema.parse(body);
       
       // Add metadata
-      const application = {
+      const application: LoanApplication = {
         ...validatedData,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         status: "pending",
       };
       
-      // @ts-ignore - Ignore type issues due to schema mismatch for now
       const createdApplication = await createApplication(application);
       
       return NextResponse.json({

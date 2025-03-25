@@ -1,3 +1,15 @@
+// Re-export all type modules
+export * from './applicant';
+export * from './financial';
+export * from './loan';
+export * from './note';
+export * from './application';
+export * from './evaluation';
+
+// Status type
+export type ApplicationStatus = 'pending' | 'approved' | 'rejected' | 'review';
+
+// Error and success response types
 import { z } from 'zod';
 
 // Applicant information schema and type
@@ -52,9 +64,6 @@ export const noteSchema = z.object({
 
 export type Note = z.infer<typeof noteSchema>;
 
-// Status type
-export type ApplicationStatus = 'pending' | 'approved' | 'rejected' | 'review';
-
 // Full application schema and type
 export const applicationSchema = z.object({
   id: z.string().optional(),
@@ -73,20 +82,6 @@ export const applicationSchema = z.object({
 
 export type LoanApplication = z.infer<typeof applicationSchema>;
 
-// Recommendation schema and type for system evaluation
-export const recommendationSchema = z.object({
-  status: z.enum(['Approve', 'Review', 'Decline']),
-  message: z.string(),
-  score: z.number(),
-  factors: z.array(z.object({
-    name: z.string(),
-    impact: z.enum(['positive', 'negative', 'neutral']),
-    description: z.string(),
-  })),
-});
-
-export type Recommendation = z.infer<typeof recommendationSchema>;
-
 // Error response schema and type
 export const errorResponseSchema = z.object({
   message: z.string(),
@@ -104,28 +99,4 @@ export const successResponseSchema = z.object({
   data: z.any(),
 });
 
-export type SuccessResponse = z.infer<typeof successResponseSchema>;
-
-// Evaluation criteria and thresholds for rule-based engine
-export const evaluationCriteriaSchema = z.object({
-  minimumCreditScore: z.number(),
-  maximumDtiRatio: z.number(),
-  minimumIncome: z.number(),
-  maximumLoanToIncomeRatio: z.number(),
-  maximumLoanToValueRatio: z.number().optional(),
-  minimumEmploymentYears: z.number(),
-  bankruptcyImpact: z.number(),
-});
-
-export type EvaluationCriteria = z.infer<typeof evaluationCriteriaSchema>;
-
-// Default evaluation criteria
-export const defaultEvaluationCriteria: EvaluationCriteria = {
-  minimumCreditScore: 650,
-  maximumDtiRatio: 43,
-  minimumIncome: 25000,
-  maximumLoanToIncomeRatio: 3,
-  maximumLoanToValueRatio: 80,
-  minimumEmploymentYears: 1,
-  bankruptcyImpact: -100,
-}; 
+export type SuccessResponse = z.infer<typeof successResponseSchema>; 

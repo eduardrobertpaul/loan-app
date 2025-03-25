@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Dashboard() {
   const { data: session } = useSession();
-  const { dashboard, navigation } = useTranslation();
+  const { dashboard, navigation, t } = useTranslation();
 
   // Sample data for the dashboard
   const stats = {
@@ -48,7 +48,7 @@ export default function Dashboard() {
     <div>
       <h1 className="text-2xl font-bold mb-6">{dashboard.title}</h1>
       <p className="mb-6">
-        {dashboard.welcome.replace('{name}', session?.user?.name || 'User')}
+        {t.rich('dashboard.welcome', { name: session?.user?.name || 'User' })}
       </p>
 
       {/* Statistics Cards */}
@@ -79,7 +79,7 @@ export default function Dashboard() {
 
       {/* Quick Actions */}
       <div className="bg-white rounded-lg shadow p-6 mb-8">
-        <h2 className="text-lg font-semibold mb-4">Acțiuni Rapide</h2>
+        <h2 className="text-lg font-semibold mb-4">{dashboard.quickActions}</h2>
         <div className="flex flex-wrap gap-3">
           <Link
             href="/dashboard/applications/new"

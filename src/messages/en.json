@@ -1,6 +1,7 @@
 {
   "common": {
     "appTitle": "Loan Evaluation System",
+    "appDescription": "Platform for evaluating and managing loan applications",
     "loading": "Loading...",
     "error": "Error",
     "required": "Required",
@@ -39,7 +40,8 @@
     "pendingApplications": "Pending Applications",
     "approvedApplications": "Approved Applications",
     "rejectedApplications": "Rejected Applications",
-    "recentActivity": "Recent Activity"
+    "recentActivity": "Recent Activity",
+    "quickActions": "Quick Actions"
   },
   "applications": {
     "title": "Loan Applications",

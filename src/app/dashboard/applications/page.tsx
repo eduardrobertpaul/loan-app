@@ -156,7 +156,9 @@ export default function ApplicationsPage() {
                 <div className="text-sm text-gray-500 dark:text-gray-400">ID: {application.id}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900 dark:text-white">${application.loanAmount.toLocaleString()}</div>
+                <div className="text-sm text-gray-900 dark:text-white">
+                  ${application.loanAmount ? application.loanAmount.toLocaleString() : '0'}
+                </div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">{application.purpose}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">

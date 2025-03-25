@@ -1,5 +1,52 @@
 import { LoanApplication } from "@/lib/types";
 import { EvaluationEngine } from "@/lib/utils/evaluation-engine";
+import { z } from "zod";
+
+// Define applicationSchema for use in API routes
+export const applicationSchema = z.object({
+  id: z.string().optional(),
+  applicant: z.object({
+    id: z.string().optional(),
+    name: z.string(),
+    email: z.string().email(),
+    phone: z.string(),
+    address: z.string(),
+    dateOfBirth: z.string(),
+    employmentStatus: z.string(),
+    employerName: z.string().optional(),
+    jobTitle: z.string().optional(),
+    yearsEmployed: z.number().optional(),
+  }),
+  financial: z.object({
+    income: z.number(),
+    monthlyExpenses: z.number(),
+    otherLoans: z.number(),
+    creditScore: z.number(),
+    bankruptcies: z.number().optional(),
+    existingProperties: z.number().optional(),
+  }),
+  loan: z.object({
+    amount: z.number(),
+    purpose: z.string(),
+    term: z.number(),
+    collateral: z.string(),
+    collateralType: z.string().optional(),
+    collateralValue: z.number().optional(),
+  }),
+  status: z.enum(['pending', 'approved', 'rejected', 'review']).default('pending'),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
+  notes: z.array(z.object({
+    id: z.string(),
+    text: z.string(),
+    author: z.string(),
+    createdAt: z.string(),
+  })).optional(),
+  evaluationScore: z.number().optional(),
+  decisionReason: z.string().optional(),
+  reviewedBy: z.string().optional(),
+  reviewedAt: z.string().optional(),
+});
 
 // Mock database for development - would be replaced with proper DB in production
 let applications: LoanApplication[] = [

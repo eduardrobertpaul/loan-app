@@ -1,6 +1,7 @@
 {
   "common": {
     "appTitle": "Sistem de Evaluare Credite",
+    "appDescription": "Platformă pentru evaluarea și gestionarea cererilor de credit",
     "loading": "Se încarcă...",
     "error": "Eroare",
     "required": "Obligatoriu",
@@ -39,7 +40,8 @@
     "pendingApplications": "Cereri în așteptare",
     "approvedApplications": "Cereri aprobate",
     "rejectedApplications": "Cereri respinse",
-    "recentActivity": "Activitate recentă"
+    "recentActivity": "Activitate recentă",
+    "quickActions": "Acțiuni Rapide"
   },
   "applications": {
     "title": "Cereri de Credite",

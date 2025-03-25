@@ -1,4 +1,5 @@
-import { LoanApplication, Recommendation, EvaluationCriteria, defaultEvaluationCriteria } from '../types';
+import { LoanApplication } from '../types';
+import { Recommendation, EvaluationCriteria, defaultEvaluationCriteria } from '../types/evaluation';
 
 /**
  * Loan Application Evaluation Engine

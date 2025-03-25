@@ -3,10 +3,10 @@ import { z } from "zod";
 import { processApplication } from "@/lib/services/application-service";
 import { auth } from "../../../../../../auth";
 
-// Validation schema for the process request
+// Process request schema
 const processRequestSchema = z.object({
   decision: z.enum(['approved', 'rejected']),
-  comments: z.string().optional()
+  comments: z.string().optional(),
 });
 
 // Ensure request is authenticated
@@ -29,7 +29,7 @@ async function authenticate() {
   };
 }
 
-// POST /api/applications/[id]/process - Process an application
+// POST /api/applications/[id]/process - Process a loan application (approve/reject)
 export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -37,13 +37,6 @@ export async function POST(
   const authResult = await authenticate();
   if (!authResult.isAuthenticated) {
     return authResult.response;
-  }
-  
-  if (!authResult.session.user?.name) {
-    return NextResponse.json(
-      { message: "User name is required" },
-      { status: 400 }
-    );
   }
   
   try {
@@ -54,10 +47,16 @@ export async function POST(
     try {
       const { decision, comments } = processRequestSchema.parse(body);
       
+      // Get the reviewer name from the session
+      const reviewerName = authResult.isAuthenticated && authResult.session?.user?.name 
+        ? authResult.session.user.name 
+        : 'System';
+      
+      // Process the application
       const processedApplication = await processApplication(
-        id,
-        decision,
-        authResult.session.user.name,
+        id, 
+        decision, 
+        reviewerName,
         comments
       );
       

@@ -56,14 +56,14 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
   }
   
   // Calculate debt-to-income ratio
-  const monthlyIncome = application.financial.income / 12;
-  const dti = ((application.financial.monthlyExpenses + application.financial.otherLoans) / monthlyIncome) * 100;
+  const monthlyIncome = application.financial?.income / 12;
+  const dti = ((application.financial?.monthlyExpenses + application.financial?.otherLoans) / monthlyIncome) * 100;
   
   // Determine approval recommendation
   const getRecommendation = () => {
-    if (application.financial.creditScore >= 700 && dti <= 36) {
+    if (application.financial?.creditScore >= 700 && dti <= 36) {
       return { status: 'Approve', message: 'Good credit score and acceptable DTI ratio.' };
-    } else if (application.financial.creditScore >= 650 && dti <= 40) {
+    } else if (application.financial?.creditScore >= 650 && dti <= 40) {
       return { status: 'Review', message: 'Credit score and DTI ratio are borderline.' };
     } else {
       return { status: 'Decline', message: 'Low credit score or high DTI ratio.' };
@@ -182,35 +182,35 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Annual Income</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.financial.income.toLocaleString()}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.financial?.income ? application.financial.income.toLocaleString() : '0'}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Employment Status</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white capitalize">{application.financial.employmentStatus}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white capitalize">{application.financial?.employmentStatus}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Employer</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.financial.employerName}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.financial?.employerName}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Job Title</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.financial.jobTitle}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.financial?.jobTitle}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Years Employed</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.financial.yearsEmployed}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.financial?.yearsEmployed}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Monthly Expenses</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.financial.monthlyExpenses.toLocaleString()}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.financial?.monthlyExpenses ? application.financial.monthlyExpenses.toLocaleString() : '0'}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Other Loan Payments (Monthly)</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.financial.otherLoans.toLocaleString()}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.financial?.otherLoans ? application.financial.otherLoans.toLocaleString() : '0'}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Credit Score</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.financial.creditScore}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.financial?.creditScore}</dd>
                   </div>
                 </dl>
               </div>
@@ -227,36 +227,38 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Loan Amount</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.loan.amount.toLocaleString()}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.loan?.amount ? application.loan.amount.toLocaleString() : '0'}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Purpose</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.loan.purpose}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.loan?.purpose}</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Term</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.loan.term} years</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.loan?.term} years</dd>
                   </div>
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Collateral</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white capitalize">{application.loan.collateral}</dd>
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white capitalize">{application.loan?.collateral}</dd>
                   </div>
-                  {application.loan.collateral === 'yes' && (
+                  {application.loan?.collateral === 'yes' && (
                     <>
                       <div>
                         <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Collateral Type</dt>
-                        <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.loan.collateralType}</dd>
+                        <dd className="mt-1 text-sm text-gray-900 dark:text-white">{application.loan?.collateralType}</dd>
                       </div>
                       <div>
                         <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Collateral Value</dt>
-                        <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.loan.collateralValue.toLocaleString()}</dd>
+                        <dd className="mt-1 text-sm text-gray-900 dark:text-white">${application.loan?.collateralValue ? application.loan.collateralValue.toLocaleString() : '0'}</dd>
                       </div>
                     </>
                   )}
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Monthly Payment (Estimated)</dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-                      ${Math.round(application.loan.amount / (application.loan.term * 12)).toLocaleString()}/month
+                      ${((application.loan?.amount && application.loan?.term) 
+                        ? Math.round(application.loan.amount / (application.loan.term * 12)).toLocaleString() 
+                        : '0')}/month
                     </dd>
                   </div>
                 </dl>
@@ -286,7 +288,7 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
                                   <span className="font-medium text-gray-900 dark:text-white">{note.author}</span>
                                 </div>
                                 <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
-                                  {new Date(note.createdAt).toLocaleString()}
+                                  {note.createdAt ? new Date(note.createdAt).toLocaleString() : ''}
                                 </p>
                               </div>
                               <div className="mt-2 text-sm text-gray-700 dark:text-gray-300">
@@ -388,15 +390,15 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
                       <span>Credit Score</span>
                       <div className="ml-2 flex-shrink-0">
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          application.financial.creditScore >= 700
+                          application.financial?.creditScore >= 700
                             ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                            : application.financial.creditScore >= 650
+                            : application.financial?.creditScore >= 650
                             ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
                             : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
                         }`}>
-                          {application.financial.creditScore >= 700
+                          {application.financial?.creditScore >= 700
                             ? 'Good'
-                            : application.financial.creditScore >= 650
+                            : application.financial?.creditScore >= 650
                             ? 'Fair'
                             : 'Poor'}
                         </span>
@@ -406,18 +408,18 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
                       <div className="relative w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                         <div 
                           className={`absolute top-0 left-0 h-full rounded-full ${
-                            application.financial.creditScore >= 700
+                            application.financial?.creditScore >= 700
                               ? 'bg-green-500'
-                              : application.financial.creditScore >= 650
+                              : application.financial?.creditScore >= 650
                               ? 'bg-yellow-500'
                               : 'bg-red-500'
                           }`}
-                          style={{ width: `${(application.financial.creditScore / 850) * 100}%` }}
+                          style={{ width: `${(application.financial?.creditScore / 850) * 100}%` }}
                         ></div>
                       </div>
                       <div className="mt-1 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                         <span>300</span>
-                        <span className="font-medium text-gray-900 dark:text-white">{application.financial.creditScore}</span>
+                        <span className="font-medium text-gray-900 dark:text-white">{application.financial?.creditScore}</span>
                         <span>850</span>
                       </div>
                     </dd>
@@ -466,15 +468,15 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
                   <div>
                     <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Loan-to-Income Ratio</dt>
                     <dd className="mt-1 text-lg font-medium text-gray-900 dark:text-white">
-                      {(application.loan.amount / application.financial.income).toFixed(2)}x
+                      {(application.loan?.amount / application.financial?.income).toFixed(2)}x
                     </dd>
                   </div>
                   
-                  {application.loan.collateral === 'yes' && (
+                  {application.loan?.collateral === 'yes' && (
                     <div>
                       <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Loan-to-Value Ratio</dt>
                       <dd className="mt-1 text-lg font-medium text-gray-900 dark:text-white">
-                        {((application.loan.amount / application.loan.collateralValue) * 100).toFixed(2)}%
+                        {((application.loan?.amount / application.loan?.collateralValue) * 100).toFixed(2)}%
                       </dd>
                     </div>
                   )}

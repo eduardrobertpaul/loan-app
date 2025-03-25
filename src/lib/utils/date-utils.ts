@@ -17,13 +17,23 @@ export function extractDate(dateString: string) {
  * @param dateString - The date string in format YYYY-MM-DD
  * @returns Formatted date string (e.g., "January 1, 2023")
  */
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+export function formatDate(dateString: string | undefined | null): string {
+  if (!dateString) return '';
+  
+  try {
+    const date = new Date(dateString);
+    // Check if the date is valid
+    if (isNaN(date.getTime())) return '';
+    
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return '';
+  }
 }
 
 /**
