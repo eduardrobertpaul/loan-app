@@ -4,7 +4,13 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./src/lib/i18n.ts');
 
 const nextConfig = {
-  // Other configurations can go here if needed
+  // Ensure fonts are properly optimized and loaded
+  optimizeFonts: true,
+  
+  // Experimental options to make sure TailwindCSS works
+  experimental: {
+    optimizeCss: true
+  }
 };
 
 export default withNextIntl(nextConfig); 

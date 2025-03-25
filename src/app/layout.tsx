@@ -3,16 +3,17 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from './providers';
 import QueryProvider from './query-provider';
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "../components/theme-provider";
 
+// Load fonts without subsets to reduce complexity
 const geistSans = Geist({
-  variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -28,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning className="h-full">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
+    <html suppressHydrationWarning lang="en">
+      <body className={`${geistSans.className} antialiased h-full`}>
         <Providers>
           <ThemeProvider defaultTheme="light">
             <QueryProvider>

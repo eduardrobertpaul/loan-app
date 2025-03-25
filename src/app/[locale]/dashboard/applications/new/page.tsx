@@ -1,7 +1,6 @@
 'use client';
 
-import { useTranslation } from '@/lib/hooks/useTranslation';
-import ApplicationForm from '@/components/forms/ApplicationForm';
+import { useTranslation, ApplicationForm } from './_lib';
 
 export default function NewApplicationPage() {
   const { applications } = useTranslation();

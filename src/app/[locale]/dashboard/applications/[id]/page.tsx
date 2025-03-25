@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslation } from '@/lib/hooks/useTranslation';
 import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
+import { useTranslation } from './_lib';
 
 export default function ApplicationDetailPage({ params }: { params: { id: string } }) {
   const { applications, applicationDetails, common } = useTranslation();
